@@ -1,5 +1,7 @@
-package com.imaginea.dilip.grep;
+package com.imaginea.dilip.grep.util;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -16,7 +18,8 @@ public class TextFileReader {
 	 * @return
 	 * @throws IOException
 	 */
-	static String readFile(String path) throws IOException {
+	public static String readFile(String path) throws IOException {
+		// return readFile(path, StandardCharsets.UTF_8);
 		return readFile(path, StandardCharsets.UTF_8);
 	}
 
@@ -28,8 +31,13 @@ public class TextFileReader {
 	 * @return
 	 * @throws IOException
 	 */
-	static String readFile(String path, Charset encoding) throws IOException {
+	public static String readFile(String path, Charset encoding) throws IOException {
 		byte[] encoded = Files.readAllBytes(Paths.get(path));
 		return encoding.decode(ByteBuffer.wrap(encoded)).toString();
+	}
+
+	public static BufferedReader readFileAsBuff(String path) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		return br;
 	}
 }

@@ -1,4 +1,4 @@
-package com.imaginea.dilip.grep;
+package com.imaginea.dilip.grep.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,5 +15,9 @@ public class TextSearcher {
 		}
 
 		return result;
+	}
+
+	public static boolean isStringContains(String key, String sString) {
+		return sString.contains(key);
 	}
 }
