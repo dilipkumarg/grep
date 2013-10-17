@@ -49,8 +49,9 @@ public class Grep {
 	private void printSearchResults(BufferedReader br, String searchKey)
 			throws IOException {
 		String curLine = "";
+		TextSearcher ts = new TextSearcher(searchKey);
 		while ((curLine = br.readLine()) != null) {
-			if (TextSearcher.isStringContains(searchKey, curLine)) {
+			if (ts.isStringContains(curLine)) {
 				System.out.println(curLine);
 			}
 		}
