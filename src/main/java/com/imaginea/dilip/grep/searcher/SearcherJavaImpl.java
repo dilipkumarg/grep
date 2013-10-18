@@ -1,14 +1,14 @@
-package com.imaginea.dilip.grep.util;
+package com.imaginea.dilip.grep.searcher;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextSearcher {
+public class SearcherJavaImpl implements TextSearcher {
 	private Pattern pattern;
 
-	public TextSearcher(String expression) {
+	public SearcherJavaImpl(String expression) {
 		this.pattern = Pattern.compile(expression);
 	}
 

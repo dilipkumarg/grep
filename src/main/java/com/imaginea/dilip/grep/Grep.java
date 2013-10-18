@@ -5,8 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import com.imaginea.dilip.grep.searcher.TextSearcher;
+import com.imaginea.dilip.grep.searcher.TextSearcherFactory;
 import com.imaginea.dilip.grep.util.TextFileReader;
-import com.imaginea.dilip.grep.util.TextSearcher;
 
 public class Grep {
 	public static void main(String[] args) throws IOException {
@@ -49,7 +50,7 @@ public class Grep {
 	private void printSearchResults(BufferedReader br, String searchKey)
 			throws IOException {
 		String curLine = "";
-		TextSearcher ts = new TextSearcher(searchKey);
+		TextSearcher ts = TextSearcherFactory.getTextSearcher(searchKey);
 		while ((curLine = br.readLine()) != null) {
 			if (ts.isStringContains(curLine)) {
 				System.out.println(curLine);
