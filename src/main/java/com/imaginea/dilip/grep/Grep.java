@@ -13,22 +13,24 @@ import com.imaginea.dilip.grep.util.TextFileReader;
 
 public class Grep {
 	private String searchKey = null;
-	private String fileName;
+	private String filePath = null;
 	private boolean isCustomImpl;
+	private boolean isCaseInSensitive;
 
 	public Grep() {
-		fileName = Grep.class.getResource("/sample.txt").getPath();
 		isCustomImpl = false;
+		isCaseInSensitive = false;
 	}
 
 	public static void main(String[] args) throws IOException {
 		Grep grep = new Grep();
 		grep.buildArgs(args);
-		if (grep.isSearchKeyNotNull()) {
+		if (grep.isSearchKeyNotNull() && grep.isFileNameNotNull()) {
 			grep.doSearch();
 
 		} else {
-			throw new IllegalArgumentException("Search key must be passed");
+			throw new IllegalArgumentException(
+					"Search key and File Name must be passed");
 		}
 
 	}
@@ -36,7 +38,7 @@ public class Grep {
 	private void doSearch() throws IOException {
 		BufferedReader br = null;
 		try {
-			br = getBufferedReader(fileName);
+			br = getBufferedReader(filePath);
 			long startTime = System.currentTimeMillis();
 			System.out.println("Searching started: "
 					+ new Date(startTime).toString());
@@ -57,6 +59,10 @@ public class Grep {
 		return searchKey != null;
 	}
 
+	private boolean isFileNameNotNull() {
+		return filePath != null;
+	}
+
 	private void buildArgs(String[] args) {
 		StringBuilder specialArgs = new StringBuilder();
 		List<String> params = new ArrayList<String>();
@@ -75,15 +81,16 @@ public class Grep {
 		if (specialArgs.contains("c")) {
 			isCustomImpl = true;
 		}
+		if(specialArgs.contains("i")) {
+			isCaseInSensitive = true;
+		}
 	}
 
 	private void buildParams(List<String> params) {
 		int size = params.size();
-		if (size > 0) {
+		if (size > 1) {
 			searchKey = params.get(0);
-			if (size > 1) {
-				fileName = params.get(1);
-			}
+			filePath = params.get(1);
 		}
 	}
 
@@ -99,7 +106,7 @@ public class Grep {
 		String curLine = "";
 		String implType = (isCustomImpl ? "c" : "j");
 		TextSearcher ts = TextSearcherFactory.getTextSearcher(implType,
-				searchKey);
+				searchKey, isCaseInSensitive);
 		while ((curLine = br.readLine()) != null) {
 			if (ts.isStringContains(curLine)) {
 				System.out.println(curLine);

@@ -1,6 +1,16 @@
 package com.imaginea.dilip.grep.searcher;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TextSearcherFactory {
+
+	private static Map<String, TextSearcherType> typeMap = new HashMap<String, TextSearcherType>();
+	static {
+		typeMap.put("j", TextSearcherType.JAVA);
+		typeMap.put("c", TextSearcherType.CUSTOM);
+	}
+
 	/**
 	 * It will returns the default text searcher implementation. In this case
 	 * default searcher is java native implementor.
@@ -9,7 +19,7 @@ public class TextSearcherFactory {
 	 * @return
 	 */
 	public static TextSearcher getTextSearcher(String searchKey) {
-		return getTextSearcher("j", searchKey);
+		return getTextSearcher("j", searchKey, false);
 	}
 
 	/**
@@ -21,17 +31,18 @@ public class TextSearcherFactory {
 	 * @param searchKey
 	 * @return
 	 */
-	public static TextSearcher getTextSearcher(String type, String searchKey) {
+	public static TextSearcher getTextSearcher(String type, String searchKey,
+			boolean caseInSensitive) {
 		TextSearcher ts = null;
 		if (type != null) {
-			if (type.equalsIgnoreCase("j")) {
-				ts = new SearcherJavaImpl(searchKey);
-			} else if (type.equalsIgnoreCase("c")) {
-				ts = new SeacherCustomImpl(searchKey);
-			} else {
+			try {
+				ts = typeMap.get(type).getTextSearcher(searchKey,
+						caseInSensitive);
+			} catch (NullPointerException e) {
 				throw new IllegalArgumentException(
 						"Invalid searcher type. Type should be java or custom");
 			}
+
 		} else {
 			throw new IllegalArgumentException("Type should not be null.");
 		}
