@@ -24,10 +24,9 @@ public class TextSearcherFactory {
 	public static TextSearcher getTextSearcher(String type, String searchKey) {
 		TextSearcher ts = null;
 		if (type != null) {
-			if (type.equalsIgnoreCase("j") || type.equalsIgnoreCase("java")) {
+			if (type.equalsIgnoreCase("j")) {
 				ts = new SearcherJavaImpl(searchKey);
-			} else if (type.equalsIgnoreCase("c")
-					|| type.equalsIgnoreCase("custom")) {
+			} else if (type.equalsIgnoreCase("c")) {
 				ts = new SeacherCustomImpl(searchKey);
 			} else {
 				throw new IllegalArgumentException(
