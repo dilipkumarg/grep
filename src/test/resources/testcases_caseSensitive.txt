@@ -1,0 +1,28 @@
+java::true
+now you are learning java::true
+now you are learning javaphp::true
+now you are learning php::false
+your are tryingjavaphp::true
+java now you are learning::true
+javanow you are learning::true
+now learning java you are::true
+now you are learning php andjava::true
+you are tryingjava now::true
+you not trying javanow::true
+
+JAVA::false
+now you are learning JAVA::false
+now you are learning JAVAphp::false
+now you are learning php::false
+JAVA now you are learning::false
+JAVAnow you are learning::false
+now learning JAVA you are::false
+now you are learning php andJAVA::false
+you are tryingJAVA now::false
+you not trying JAVAnow::false
+
+now learning jav and php::false
+you trying jva now::false
+you trying now ava::false
+
+

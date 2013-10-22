@@ -10,7 +10,7 @@ public class SearcherCustomImpl implements TextSearcher {
 			throw new IllegalArgumentException("Search Key should not be empty");
 		}
 		if (isCaseInSensitive) {
-			// converting to lower case if not a case sensitive search
+			// converting to lower case if it is a case insensitive search
 			searchKey = searchKey.toLowerCase();
 		}
 		this.searchKey = searchKey.toCharArray();

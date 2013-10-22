@@ -35,12 +35,12 @@ public class TextSearcherFactory {
 			boolean caseInSensitive) {
 		TextSearcher ts = null;
 		if (type != null) {
-			try {
-				ts = typeMap.get(type).getTextSearcher(searchKey,
-						caseInSensitive);
-			} catch (NullPointerException e) {
+			TextSearcherType tsType = typeMap.get(type);
+			if (tsType != null) {
+				ts = tsType.getTextSearcher(searchKey, caseInSensitive);
+			} else {
 				throw new IllegalArgumentException(
-						"Invalid searcher type. Type should be java or custom");
+						"Invalid searcher type. Type should be java(j) or custom(c)");
 			}
 
 		} else {
