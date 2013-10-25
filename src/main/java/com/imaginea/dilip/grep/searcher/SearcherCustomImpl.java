@@ -1,8 +1,12 @@
 package com.imaginea.dilip.grep.searcher;
 
+import com.imaginea.dilip.grep.searcher.custom.NFA;
+import com.imaginea.dilip.grep.util.PostfixConverter;
+
 public class SearcherCustomImpl implements TextSearcher {
 	private final char[] searchKey;
 	private final boolean isCaseInSensitive;
+	NFA nfa;
 
 	public SearcherCustomImpl(String searchKey, boolean caseSensitive) {
 		this.isCaseInSensitive = caseSensitive;
@@ -14,16 +18,19 @@ public class SearcherCustomImpl implements TextSearcher {
 			searchKey = searchKey.toLowerCase();
 		}
 		this.searchKey = searchKey.toCharArray();
+		nfa = new NFA();
+		nfa.postToNfa(PostfixConverter.infixToPostfix(this.searchKey, 0,
+				this.searchKey.length));
 	}
 
 	public boolean isStringContains(String sString) {
 		if (isCaseInSensitive) {
 			sString = sString.toLowerCase();
 		}
-		return isContains(sString.toCharArray());
+		return nfa.isContains(sString.toCharArray());
 	}
 
-	private boolean isContains(char[] targetString) {
+	public boolean isContains(char[] targetString) {
 		boolean isContains = false;
 		int targetStrLen = targetString.length;
 

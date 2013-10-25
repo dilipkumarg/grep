@@ -77,7 +77,7 @@ function_testJava() {
 	local keyword_i=0
 	while [[ $keyword_i -lt $KEY_WORDS_COUNT ]]; do
 		#function_doReturnExcecutionTime "echo ${KEY_WORDS[$i]}"
-		com="$function_getCommand $JAVA_EXECUTION ${KEY_WORDS[$keyword_i]} $LOG_FILE"
+		com="$function_getCommand $JAVA_EXECUTION -c ${KEY_WORDS[$keyword_i]} $LOG_FILE"
 		function_getExcecTime "$com"
 		java_details=("${java_details[@]}" $?)
 		keyword_i=$(($keyword_i+1))

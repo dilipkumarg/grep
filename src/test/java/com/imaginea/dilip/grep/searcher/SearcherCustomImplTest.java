@@ -62,12 +62,14 @@ public class SearcherCustomImplTest {
 		SearcherCustomImpl searcher = new SearcherCustomImpl(TEST_PATTERN, true);
 		String currLine = "";
 		String[] tokens;
+		boolean response;
 		while ((currLine = br.readLine()) != null) {
 			tokens = currLine.split("::");
 			if (tokens.length >= 2) {
-				System.out.println(tokens[0] + "::" + tokens[1]);
-				assertEquals(Boolean.valueOf(tokens[1]),
-						searcher.isStringContains(tokens[0]));
+				response = searcher.isStringContains(tokens[0]);
+				assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
+						+ "-> return value is:" + response,
+						Boolean.valueOf(tokens[1]), response);
 			}
 		}
 
