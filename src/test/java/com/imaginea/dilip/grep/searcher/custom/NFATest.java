@@ -21,10 +21,10 @@ public class NFATest {
 		char[] expected = "pramati".toCharArray();
 		int i = 0;
 		while (current != null) {
-			if(i < expected.length) {
-  			assertEquals(expected[i++], current.getCh());
-			current = current.getOut();
-			}else {
+			if (i < expected.length) {
+				assertEquals(expected[i++], current.getCh());
+				current = current.getOut();
+			} else {
 				fail("current having more cases, than actual");
 			}
 		}

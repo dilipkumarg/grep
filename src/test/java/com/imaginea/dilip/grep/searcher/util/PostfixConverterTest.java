@@ -15,19 +15,27 @@ public class PostfixConverterTest {
 
 	@Test
 	public void test() throws IOException {
-		BufferedReader br = TextFileReader.readFileAsBuff(this.getClass()
-				.getResource(TEST_FILE).getPath());
-		String currLine = "";
-		String[] tokens;
-		String response;
-		while ((currLine = br.readLine()) != null) {
-			tokens = currLine.split("::");
-			if (tokens.length >= 2) {
-				char[] infixStr = tokens[0].toCharArray();
-				response = new String(PostfixConverter.infixToPostfix(infixStr,
-						0, infixStr.length));
-				assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
-						+ "-> return value is:" + response, tokens[1], response);
+		BufferedReader br = null;
+		try {
+			br = TextFileReader.readFileAsBuff(this.getClass()
+					.getResource(TEST_FILE).getPath());
+			String currLine = "";
+			String[] tokens;
+			String response;
+			while ((currLine = br.readLine()) != null) {
+				tokens = currLine.split("::");
+				if (tokens.length >= 2) {
+					char[] infixStr = tokens[0].toCharArray();
+					response = new String(PostfixConverter.infixToPostfix(
+							infixStr, 0, infixStr.length));
+					assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
+							+ "-> return value is:" + response, tokens[1],
+							response);
+				}
+			}
+		} finally {
+			if (br != null) {
+				br.close();
 			}
 		}
 	}

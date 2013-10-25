@@ -37,39 +37,54 @@ public class SearcherCustomImplTest {
 
 	@Test
 	public void isStringContainsCaseSenstive() throws IOException {
-		BufferedReader br = TextFileReader.readFileAsBuff(this.getClass()
-				.getResource(CASE_SENSITIVE_FILE).getPath());
-		SearcherCustomImpl searcher = new SearcherCustomImpl(TEST_PATTERN,
-				false);
-		String currLine = "";
-		String[] tokens;
-		boolean response;
-		while ((currLine = br.readLine()) != null) {
-			tokens = currLine.split("::");
-			if (tokens.length >= 2) {
-				response = searcher.isStringContains(tokens[0]);
-				assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
-						+ "-> return value is:" + response,
-						Boolean.valueOf(tokens[1]), response);
+		BufferedReader br = null;
+		try {
+			br = TextFileReader.readFileAsBuff(this.getClass()
+					.getResource(CASE_SENSITIVE_FILE).getPath());
+			SearcherCustomImpl searcher = new SearcherCustomImpl(TEST_PATTERN,
+					false);
+			String currLine = "";
+			String[] tokens;
+			boolean response;
+			while ((currLine = br.readLine()) != null) {
+				tokens = currLine.split("::");
+				if (tokens.length >= 2) {
+					response = searcher.isStringContains(tokens[0]);
+					assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
+							+ "-> return value is:" + response,
+							Boolean.valueOf(tokens[1]), response);
+				}
+			}
+		} finally {
+			if (br != null) {
+				br.close();
 			}
 		}
 	}
 
 	@Test
 	public void isStringContainsCaseInSenstive() throws IOException {
-		BufferedReader br = TextFileReader.readFileAsBuff(this.getClass()
-				.getResource(CASE_IN_SENSITIVE_FILE).getPath());
-		SearcherCustomImpl searcher = new SearcherCustomImpl(TEST_PATTERN, true);
-		String currLine = "";
-		String[] tokens;
-		boolean response;
-		while ((currLine = br.readLine()) != null) {
-			tokens = currLine.split("::");
-			if (tokens.length >= 2) {
-				response = searcher.isStringContains(tokens[0]);
-				assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
-						+ "-> return value is:" + response,
-						Boolean.valueOf(tokens[1]), response);
+		BufferedReader br = null;
+		try {
+			br = TextFileReader.readFileAsBuff(this.getClass()
+					.getResource(CASE_IN_SENSITIVE_FILE).getPath());
+			SearcherCustomImpl searcher = new SearcherCustomImpl(TEST_PATTERN,
+					true);
+			String currLine = "";
+			String[] tokens;
+			boolean response;
+			while ((currLine = br.readLine()) != null) {
+				tokens = currLine.split("::");
+				if (tokens.length >= 2) {
+					response = searcher.isStringContains(tokens[0]);
+					assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
+							+ "-> return value is:" + response,
+							Boolean.valueOf(tokens[1]), response);
+				}
+			}
+		} finally {
+			if (br != null) {
+				br.close();
 			}
 		}
 
