@@ -1,6 +1,5 @@
 package com.imaginea.dilip.grep.searcher;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SearcherJavaImpl implements TextSearcher {
@@ -10,12 +9,11 @@ public class SearcherJavaImpl implements TextSearcher {
 		if (caseInSensitive) {
 			this.pattern = Pattern.compile(searchKey, Pattern.CASE_INSENSITIVE);
 		} else {
-			this.pattern = Pattern.compile(searchKey, Pattern.CASE_INSENSITIVE);
+			this.pattern = Pattern.compile(searchKey);
 		}
 	}
 
 	public boolean isStringContains(String sString) {
-		Matcher matcher = pattern.matcher(sString);
-		return matcher.find();
+		return pattern.matcher(sString).find();
 	}
 }

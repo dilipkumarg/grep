@@ -7,9 +7,11 @@ public class PostfixConverter {
 		StringBuilder sb = new StringBuilder();
 		if (endPos <= infixStr.length) {
 			boolean subset = false;
+			boolean subsetFirstChar = false;
 			for (int i = startPos; i < endPos; i++) {
 				char ch = infixStr[i];
 				if (ch == '(') {
+					subsetFirstChar = (i == startPos);
 					int subEndPos = getSubSetPos(infixStr, ++i, endPos);
 					sb.append(infixToPostfix(infixStr, i, subEndPos));
 					i = subEndPos;
@@ -24,7 +26,10 @@ public class PostfixConverter {
 						dolChar = true;
 					}
 					sb.append(ch);
-					if (dolChar) {
+					if (isEscapedAnyCase(infixStr, i, ch)) {
+						sb.append(infixStr[++i]);
+					}
+					if (dolChar && !subsetFirstChar) {
 						sb.append('$');
 					}
 					if (subset) {
@@ -32,6 +37,9 @@ public class PostfixConverter {
 					}
 				} else {
 					sb.append(ch);
+					if (isEscapedAnyCase(infixStr, i, ch)) {
+						sb.append(infixStr[++i]);
+					}
 					sb.append('$');
 					if (subset) {
 						sb.append('$');
@@ -46,6 +54,11 @@ public class PostfixConverter {
 		}
 
 		return sb.toString().toCharArray();
+	}
+
+	private static boolean isEscapedAnyCase(char[] infixStr, int pos,
+			char curChar) {
+		return (curChar == '\\' && (((pos + 1) < infixStr.length) && (infixStr[pos + 1] == '.')));
 	}
 
 	private static int getSubSetPos(char[] infixStr, int pos, int endPos) {
@@ -68,7 +81,7 @@ public class PostfixConverter {
 	}
 
 	public static void main(String[] args) {
-		char[] str = "pra+(mati)+".toCharArray();
+		char[] str = "(pramati)+".toCharArray();
 		System.out.println(infixToPostfix(str, 0, str.length));
 	}
 }

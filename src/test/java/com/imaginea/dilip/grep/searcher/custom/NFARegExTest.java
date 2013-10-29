@@ -8,7 +8,6 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.imaginea.dilip.grep.util.PostfixConverter;
 import com.imaginea.dilip.grep.util.TextFileReader;
 
 public class NFARegExTest {
@@ -32,10 +31,8 @@ public class NFARegExTest {
 			while ((currLine = br.readLine()) != null) {
 				tokens = currLine.split("::");
 				if (tokens.length >= 3) {
-					NFA nfa = new NFA();
 					infixStr = tokens[0].toCharArray();
-					nfa.postToNfa(PostfixConverter.infixToPostfix(infixStr, 0,
-							infixStr.length));
+					NFA nfa = new NFA(infixStr);
 					response = nfa.isContains(tokens[1].toCharArray());
 					assertEquals("Fails at->" + tokens[0] + "::" + tokens[1]
 							+ "::" + tokens[2] + "-> But return value is:"

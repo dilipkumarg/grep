@@ -40,4 +40,35 @@ p*ramati::ramati::true
 p?ramati::pramati::true
 p?ramati::ramati::true
 
+.ramati::pramati::true
+.ramati::aramati::true
+.ramati::dramati::true
+.ramati::ppramati::true
+
+.?ramati::ramati::true
+.?ramati::pramati::true
+.*ramati::ramati::true
+.*ramati::pppppppppramati::true
+.+ramati::ramati::false
+.+ramati::pramati::true
+.+ramati::pppramati::true
+
+pr\*amati::pr*amati::true
+pr\*amati::prrramati::false
+pr\*amati::pramati::false
+pr\*amati::pamati::false
+
+pr\+amati::pr+amati::true
+pr\+amati::prrramati::false
+pr\+amati::pramati::false
+pr\+amati::pamati::false
+
+pr\.amati::pr.amati::true
+pr\.amati::pramati::false
+pr\.amati::praamati::false
+
+\.pramati::.pramati::true
+
+
+
 

@@ -2,8 +2,9 @@ package com.imaginea.dilip.grep.searcher.custom;
 
 public class State {
 
-	public static char JOIN = 256;
-	public static char SPLIT = 257;
+	public static final char JOIN = 256;
+	public static final char SPLIT = 257;
+	public static final char ANY = 255;
 
 	private final char ch;
 	private State out;

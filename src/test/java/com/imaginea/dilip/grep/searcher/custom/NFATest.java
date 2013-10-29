@@ -1,6 +1,7 @@
 package com.imaginea.dilip.grep.searcher.custom;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,12 +12,11 @@ public class NFATest {
 
 	@Before
 	public void setUp() throws Exception {
-		nfa = new NFA();
+		nfa = new NFA("pramati".toCharArray());
 	}
 
 	@Test
 	public void testSimpleCase() {
-		nfa.postToNfa("pr$a$m$a$t$i$".toCharArray());
 		State current = nfa.getFirst();
 		char[] expected = "pramati".toCharArray();
 		int i = 0;

@@ -59,13 +59,14 @@ public class Grep {
 	private void printSearchResults(BufferedReader br, Arguments args)
 			throws IOException {
 		String curLine = "";
-		TextSearcher ts = TextSearcherFactory.getTextSearcher(
+		final TextSearcher ts = TextSearcherFactory.getTextSearcher(
 				args.getImplType(), args.getSearchKey(),
 				args.isCaseInSensitive());
 		while ((curLine = br.readLine()) != null) {
 			if (ts.isStringContains(curLine)) {
 				System.out.println(curLine);
 			}
+
 		}
 	}
 
