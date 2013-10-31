@@ -1,4 +1,4 @@
-package com.imaginea.dilip.grep.searcher.custom;
+package com.imaginea.dilip.grep.entities;
 
 public class State {
 

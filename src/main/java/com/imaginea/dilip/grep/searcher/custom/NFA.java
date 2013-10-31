@@ -1,5 +1,6 @@
 package com.imaginea.dilip.grep.searcher.custom;
 
+import com.imaginea.dilip.grep.entities.State;
 import com.imaginea.dilip.grep.util.PostfixConverter;
 
 public class NFA {
@@ -32,9 +33,7 @@ public class NFA {
 	}
 
 	public static void main(String[] args) {
-		char[] infixStr = ".ramati".toCharArray();
-		NFA nfa = new NFA(PostfixConverter.infixToPostfix(infixStr, 0,
-				infixStr.length));
+		NFA nfa = new NFA(".ramati".toCharArray());
 		System.out.println(nfa.isContains("ppramati".toCharArray()));
 		// System.out.println(nfa.isMatch("prmati".toCharArray()));
 	}

@@ -1,5 +1,7 @@
 package com.imaginea.dilip.grep.searcher.custom;
 
+import com.imaginea.dilip.grep.entities.State;
+
 public class NFAMatcher {
 	private final State first;
 
