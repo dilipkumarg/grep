@@ -7,8 +7,6 @@ import java.util.Date;
 
 import com.imaginea.dilip.grep.entities.Arguments;
 import com.imaginea.dilip.grep.helpers.ArgumentsBuilder;
-import com.imaginea.dilip.grep.searcher.TextSearcher;
-import com.imaginea.dilip.grep.searcher.TextSearcherFactory;
 import com.imaginea.dilip.grep.util.TextFileReader;
 
 public class Grep {
@@ -17,7 +15,8 @@ public class Grep {
 
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
 		Grep grep = new Grep();
 		Arguments arguments = new ArgumentsBuilder().buildArgs(args);
 		if (arguments.isAllParamPassed()) {
@@ -29,14 +28,16 @@ public class Grep {
 
 	}
 
-	private void doSearch(Arguments args) throws IOException {
+	private void doSearch(Arguments args) throws IOException,
+			InterruptedException {
 		BufferedReader br = null;
 		try {
 			br = getBufferedReader(args.getFilePath());
 			long startTime = System.currentTimeMillis();
 			System.out.println("Searching started: "
 					+ new Date(startTime).toString());
-			printSearchResults(br, args);
+			FileSearcher fs = new FileSearcher(args);
+			fs.printSearchResults(br);
 			long endTime = System.currentTimeMillis();
 			System.out.println("Searching completed: "
 					+ new Date(endTime).toString());
@@ -54,20 +55,6 @@ public class Grep {
 
 		return TextFileReader.readFileAsBuff(new File(filePath)
 				.getAbsolutePath());
-	}
-
-	private void printSearchResults(BufferedReader br, Arguments args)
-			throws IOException {
-		String curLine = "";
-		final TextSearcher ts = TextSearcherFactory.getTextSearcher(
-				args.getImplType(), args.getSearchKey(),
-				args.isCaseInSensitive());
-		while ((curLine = br.readLine()) != null) {
-			if (ts.isStringContains(curLine)) {
-				System.out.println(curLine);
-			}
-
-		}
 	}
 
 }

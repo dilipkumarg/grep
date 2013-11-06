@@ -23,7 +23,7 @@ public class ArgumentsBuilderTest {
 		String[] args = { "searchkey", "-ci", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"c", true);
+				"c", "ci");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -35,7 +35,7 @@ public class ArgumentsBuilderTest {
 		String[] args = { "searchkey", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"j", false);
+				"j","");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -47,7 +47,7 @@ public class ArgumentsBuilderTest {
 		String[] args = { "searchkey", "-", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"j", false);
+				"j", "");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -59,7 +59,7 @@ public class ArgumentsBuilderTest {
 		String[] args = { "searchkey", "-c", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"c", false);
+				"c", "c");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -71,7 +71,7 @@ public class ArgumentsBuilderTest {
 		String[] args = { "searchkey", "-i", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"j", true);
+				"j", "i");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -82,7 +82,7 @@ public class ArgumentsBuilderTest {
 	public void test6() {
 		String[] args = {};
 		Arguments arguments = argBuilder.buildArgs(args);
-		Arguments argumentsExpected = new Arguments(null, null, "j", false);
+		Arguments argumentsExpected = new Arguments(null, null, "j", "");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -93,7 +93,7 @@ public class ArgumentsBuilderTest {
 	public void test7() {
 		String[] args = { "searchkey" };
 		Arguments arguments = argBuilder.buildArgs(args);
-		Arguments argumentsExpected = new Arguments(null, null, "j", false);
+		Arguments argumentsExpected = new Arguments(null, null, "j", "");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -102,10 +102,10 @@ public class ArgumentsBuilderTest {
 
 	@Test
 	public void test8() {
-		String[] args = { "searchkey", "filepath", "-ci" };
+		String[] args = { "searchkey", "filepath", "-cid" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"c", true);
+				"c", "cid");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -117,7 +117,7 @@ public class ArgumentsBuilderTest {
 		String[] args = { "-ci", "searchkey", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"c", true);
+				"c", "ci");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));
@@ -126,10 +126,10 @@ public class ArgumentsBuilderTest {
 
 	@Test
 	public void test10() {
-		String[] args = { "-c", "-i", "searchkey", "filepath" };
+		String[] args = { "-c", "-i", "-d", "searchkey", "filepath" };
 		Arguments arguments = argBuilder.buildArgs(args);
 		Arguments argumentsExpected = new Arguments("searchkey", "filepath",
-				"c", true);
+				"c", "cid");
 		assertTrue("\nActual:" + arguments.toString() + "\nExpected:"
 				+ argumentsExpected.toString(),
 				isTwoSame(argumentsExpected, arguments));

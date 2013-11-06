@@ -9,13 +9,11 @@ public class ArgumentsBuilder {
 	private String searchKey;
 	private String filePath;
 	private String implType;
-	private boolean isCaseInSensitive;
-
+	
 	public ArgumentsBuilder() {
 		searchKey = null;
 		filePath = null;
 		implType = "j";
-		isCaseInSensitive = false;
 	}
 
 	public Arguments buildArgs(String[] args) {
@@ -30,15 +28,12 @@ public class ArgumentsBuilder {
 		}
 		buildSpecialArgs(specialArgs.toString());
 		buildParams(params);
-		return new Arguments(searchKey, filePath, implType, isCaseInSensitive);
+		return new Arguments(searchKey, filePath, implType, specialArgs.toString());
 	}
 
 	private void buildSpecialArgs(String specialArgs) {
 		if (specialArgs.contains("c")) {
 			implType = "c";
-		}
-		if (specialArgs.contains("i")) {
-			isCaseInSensitive = true;
 		}
 	}
 

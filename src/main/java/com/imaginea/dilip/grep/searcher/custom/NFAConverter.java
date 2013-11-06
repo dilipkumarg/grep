@@ -24,6 +24,8 @@ public class NFAConverter {
 		char ch;
 		for (int i = 0; i < regex.length; i++) {
 			ch = regex[i];
+			// if escape char is there. then we are going one step ahead without
+			// checking any case. we are directly performing default case.
 			if (ch != '\\') {
 				charTypes.get(ch).doProcess(ch, frag);
 			} else {

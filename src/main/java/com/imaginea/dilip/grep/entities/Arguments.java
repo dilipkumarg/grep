@@ -4,14 +4,15 @@ public class Arguments {
 	private final String searchKey;
 	private final String filePath;
 	private final String implType;
-	private final boolean isCaseInSensitive;
+	private final String flags;
 
 	public Arguments(String searchKey, String filePath, String implType,
-			boolean isCaseInSensitive) {
+			String flags) {
 		this.searchKey = searchKey;
 		this.filePath = filePath;
 		this.implType = implType;
-		this.isCaseInSensitive = isCaseInSensitive;
+		this.flags = flags;
+
 	}
 
 	public String getSearchKey() {
@@ -31,7 +32,11 @@ public class Arguments {
 	}
 
 	public boolean isCaseInSensitive() {
-		return isCaseInSensitive;
+		return flags.contains("i");
+	}
+
+	public boolean isDebugMode() {
+		return flags.contains("d");
 	}
 
 	@Override
@@ -40,7 +45,9 @@ public class Arguments {
 		sb.append("Search Key:" + searchKey);
 		sb.append("\nFile Path:" + filePath);
 		sb.append("\nImplementation Type:" + implType);
-		sb.append("\n CaseInSensitive:" + isCaseInSensitive);
+		sb.append("\n CaseInSensitive:" + isCaseInSensitive());
+		sb.append("\n IsDebugMode:" + isDebugMode());
 		return sb.toString();
 	}
+
 }
